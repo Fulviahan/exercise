@@ -25,7 +25,7 @@ int fuel_up(f* fst, int cur_rel, int car_fuel) {
 			fst[i].fuel -= car_fuel;
 			fst[i].end_rel = cur_rel + car_fuel;
 			fst[i].occupy = 1;
-			printf("ocp=0, fst[%d].end_rel=%d,cur_rel:%d,car_fuel:%d\n",i,fst[i].end_rel,cur_rel,car_fuel);
+			//printf("ocp=0, fst[%d].end_rel=%d,cur_rel:%d,car_fuel:%d\n",i,fst[i].end_rel,cur_rel,car_fuel);
 			return cur_rel;
 		}
 		else {
@@ -46,7 +46,7 @@ int fuel_up(f* fst, int cur_rel, int car_fuel) {
 		cur_rel = temp_rel;
 	}
 
-	printf("ocp=1, fst[%d].end_rel=%d,cur_rel:%d,car_fuel:%d\n",index,fst[index].end_rel,cur_rel,car_fuel);
+	//printf("ocp=1, fst[%d].end_rel=%d,cur_rel:%d,car_fuel:%d\n",index,fst[index].end_rel,cur_rel,car_fuel);
 	return cur_rel;
 }
 
@@ -59,12 +59,13 @@ int solution(int A[], int N, int X, int Y, int Z) {
 	fst[1] = (f) {0, Y, 0};
 	fst[2] = (f) {0, Z, 0};
 
-	for (int i = 0; i < N; i++) {
-		cur_rel = fuel_up(fst, cur_rel, A[i]);
-		if (cur_rel == -1) {
-			return -1;
-		}
-	}
+    for (int i = 0; i < N; i++) {
+	    cur_rel = fuel_up(fst, cur_rel, A[i]);
+	    if (cur_rel == -1) {
+	        return -1;
+	    }
+    }
+    free(fst);
     return cur_rel;    
 }
 
@@ -72,7 +73,6 @@ int main()
 {
     int A[10] = {2,8,4,3,2,4,1,3,7,3};
     int re = solution(A, 10, 7, 20, 10);
-    //if (re == -1) re = 100;
     printf("%d", re);
     return 0;
 }
